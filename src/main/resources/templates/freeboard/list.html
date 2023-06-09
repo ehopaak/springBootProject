@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="~{layout/layout1}">
+
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<th:block layout:fragment="style1">
+	<style>
+.oddStyle {
+	background-color: #128aba;
+}
+
+.evenStyle {
+	background-color: pink;
+}
+
+.firstStyle {
+	color: red;
+}
+
+.lastStyle {
+	color: blue;
+}
+</style>
+</th:block>
+
+</head>
+<body>
+	<h1>FreeBoard List~</h1>
+
+	<table border="1" th:with="target1='user4', target2='user9'">
+		<tr>
+			<td>count,index</td>
+			<td>count,index</td>
+			<td>글번호</td>
+			<td>제목</td>
+			<td>작성자</td>
+			<td>target...4찾기</td>
+			<td>target...9찾기</td>
+			<td>삭제버튼</td>
+			<td>내용</td>
+			<td>작성일</td>
+			<td>수정일</td>
+		</tr>
+		<tr th:each="board,rowStatus : ${boardList}"
+			th:class="${rowStatus.even}? 'evenStyle':'oddStyle' "
+			th:classappend="${rowStatus.first or rowStatus.last}? 'firstStyle':'' ">
+			<td th:text="${rowStatus.index + '--' + rowStatus.count}"></td>
+			<td th:text="|${rowStatus.index} -- ${rowStatus.count}"></td>
+			<td th:text="|${rowStatus.first} -- ${rowStatus.last}"></td>
+			<td th:text="|${rowStatus.even} -- ${rowStatus.odd}"></td>
+			<td th:text="${rowStatus.size}"></td>
+			<td><a th:href="@{detail(bno=${board.bno})}"
+				th:text="${board.bno}"></a></td>
+			<td th:text="${board.title}">제목</td>
+			<td th:text="${board.writer}">작성자</td>
+			<td th:text="${board.writer==target1? '찾음(user4)':'손님'}">작성자</td>
+			<td th:text="${board.writer==target1? '찾음(user9)':'손님!!!'}">작성자</td>
+			<td th:if="${board.writer}"><a href="#"
+				th:if="${board.writer==target1}">삭제</a></td>
+			<td th:text="${board.contnet}">내용</td>
+			<!-- HTML에서 inline으로 thymeleaf사용하기 -->
+			<td>[[${board.regdate}]]</td>
+			<td>[[${board.updateDate}]]</td>
+		</tr>
+
+	</table>
+	<script src=https://code.jquery.com/jquery-3.7.0.min.js></script>
+	<script th:inline="javascript">
+//javaScript에서 inline으로 thymeleaf사용하기
+var boardList = [[{$boardList}]];
+$.each(boardList,function(index, item){
+	console.log(boardList);
+});
+
+</script>
+</body>
+</html>

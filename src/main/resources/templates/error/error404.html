@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/layout1}">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<div class="panel panel-default" layout:fragment="content1">
+	<img th:src="@{/images/cat3.png}"/>
+	<h1>★★★서버에서 보낸메시지★★★</h1>
+	<h2 th:text="${msg}"></h2>
+	<h2 id="here"></h2>
+</div>
+<th:block layout:fragment="style1">
+<script>
+	here.innerHTML = "입력주소 확인:" + location.href;
+</script>
+</th:block>	
+</body>
+</html>

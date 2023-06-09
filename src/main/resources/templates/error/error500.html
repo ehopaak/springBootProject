@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/layout1}">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<div class="panel panel-default" layout:fragment="content1">
+	<img th:src="@{/images/cat3.png}"/>
+	<h1>코드오류(500)</h1>
+	<h2 th:text="${msg}"></h2>
+	<p>[[${errorMap.timestamp]]</p>
+	<p>[[${errorMap.status]]</p>
+	<p>[[${errorMap.error]]</p>
+	<p>[[${errorMap.path]]</p>
+	<p>[[${errorMap.message]]</p>
+</div>
+</body>
+</html>
